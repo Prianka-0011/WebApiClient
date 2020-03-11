@@ -1,0 +1,47 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a *ngIf="userName" class="navbar-brand text-white">{{userName.FullName}}</a>
+    
+    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+</nav>
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+        <div class="event-box">
+            <div style="list-style:none;" *ngFor="let item of allEventDetailList">
+                <h2>{{item.Date}}</h2>
+                <span>{{item.UserName}}</span><br>
+                <span>{{item.Task}}</span> <br>
+                <span>{{item.Place}}</span>
+                <p>{{item.Description}}</p>
+                <button *ngIf="gflag" (click)="onGoing(item.Id)" class="btn btn-primary">g<i class="fas fa-weight-hanging"></i></button>
+                <button *ngIf="!gflag"  [disabled]="!gflag" class="btn btn-dark">g<i class="fas fa-weight-hanging"></i></button>
+                <button *ngIf="mflag" (click)="myBe(item.Id)" class="btn btn-primary">m<i class="fas fa-map-marker-alt"></i></button>
+                <button *ngIf="!mflag" [disabled]="!mflag" class="btn btn-dark">m<i class="fas fa-map-marker-alt"></i></button>
+                <button *ngIf="nflag" (click)="notInterest(item.Id)" class="btn btn-primary">n<i class="fas fa-adjust"></i></button>
+                <button *ngIf="!nflag"[disabled]="!nflag"  class="btn btn-dark">n<i class="fas fa-adjust"></i></button>
+           
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    
+<style>
+    h2{
+        color: crimson;
+    }
+    .event-box{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #2e3137;
+    color: antiquewhite;
+    text-align: center;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    padding: 0px;
+   
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+</style>

@@ -1,0 +1,126 @@
+<div class="bottom-view">
+  <div *ngFor="let item of sortData | taskPipe : service.query ; let i=index">
+    <div *ngIf="(i>0 && item.Date!=sortData[i-1].Date) || i==0">
+      <span *ngIf="!service.save" class="item-date">{{item.Date}}</span>
+        <div  *ngFor="let item1 of sortData" >
+          <div class="row">
+             <div class="col-md-6">
+              <input *ngIf="!service.save && item.Date==item1.Date"  class="form-Inline item-input" disabled value="{{item1.Task}}">
+              <input *ngIf="!service.save && item.Date==item1.Date"  class="form-Inline item-input" disabled value="{{item1.Place}}">
+              <input *ngIf="!service.save && item.Date==item1.Date"  class="form-Inline item-input" disabled value="{{item1.Description}}">
+              <span *ngIf="!service.save && item.Date==item1.Date">go{{item1.Typego}}</span>
+              <span *ngIf="!service.save && item.Date==item1.Date"(click)="may(item1.Id)">may{{item1.Typemay}}</span>
+              <span *ngIf="!service.save && item.Date==item1.Date"(click)="intrst(item1.Id)">not{{item1.TypeNinterest}}</span>
+             </div>
+             <div class="col-md-6">
+              <button *ngIf="!service.save && item.Date==item1.Date"    class="editbutton form-Inline" (click)="populateDetail(item1)" type="submit"><i class="fas fa-pen"></i></button>
+              <button *ngIf="!service.save && item.Date==item1.Date"  class="editbutton1 form-Inline" type="submit"(click)="ondeleteTask(item1.Id)"><i class="far fa-trash-alt"></i></button>
+              <button *ngIf="!service.save && item.Date==item1.Date"  class="editbutton1 form-Inline" data-toggle="modal" data-target="#exampleModal" type="submit"(click)="onshareTask(item1)"><i class="fas fa-share-alt"></i></button>
+             </div>
+          </div>     
+        </div>
+    </div>
+</div>
+<div>
+  <form #form="ngForm"  autocomplete="off" (submit)="onSubmit1(form)" >
+    <input *ngIf="service.save" type="text" placeholder="Enter your Event"  class="form-Inline item-input" name="Task" #Task="ngModel" [(ngModel)]="service.populateData.Task">
+    <input *ngIf="service.save" type="date"  class="form-Inline item-input" name="Date" #Date="ngModel" [(ngModel)]="service.populateData.Date">
+    <input *ngIf="service.save" type="text" placeholder="Enter your Place" class="form-Inline item-input" name="Place" #Place="ngModel" [(ngModel)]="service.populateData.Place">
+    <input *ngIf="service.save" type="text"placeholder="Enter your Description"  class="form-Inline item-input" name="Description" #Description="ngModel" [(ngModel)]="service.populateData.Description">
+    <button class="btn btn-primary" *ngIf="service.save">save</button>
+    <button class="btn btn-danger" *ngIf="service.save" (click)="onCancle()">cancle</button>
+   </form >
+</div>
+<!-- *ngIf="service.popup"  -->
+<!-- <div class="container">
+  <div class="pop-box">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        User List
+      </div>
+      <div *ngFor="let event of userDetails" >
+        <input type="checkbox" name="user"  (click)="onShareWithUser(event.Id)" value="">
+        <label for="user">{{event.FullName}}</label>
+        <button (click)="onCancleUserList()"><i class="far fa-window-close"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let event of userDetails" >
+        <input type="checkbox" name="user"  (click)="onShareWithUser(event.Id)" value="">
+        <label for="user">{{event.FullName}}</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" (click)="OnSubmitShare()" class="btn btn-primary">Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style> 
+.bottom-view
+{ margin-left: 0;
+width: 100%;
+background-color: rgb(247, 211, 164);;
+background-repeat: no-repeat;
+background-size: cover;
+}
+.bottom-view .item-input{
+  padding: .5rem 1rem;
+  height: 30px;
+  background-color: rgb(247, 211, 164);;
+  width: 310px;
+  font-size: 1.15rem;
+  margin-left: 12rem;
+  text-align: left;
+  margin-bottom: .5rem;
+  border-bottom: 2px solid #5E785C;
+  border-top: none;
+  border-left: none;
+  border-right: none
+}
+.bottom-view .editbutton{
+  height: 30px;
+  width: 30px;
+  margin-top: 8px;
+  border-radius: 25px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  background: #330800;
+  color:#fff;
+}
+.bottom-view .editbutton1{
+  height: 30px;
+  width: 30px;
+  margin-bottom: 4px;
+  border-radius: 25px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  background: #0C2110;
+  color:#fff;
+  
+}
+span{
+  margin-left: 9rem;
+  color: chocolate;
+}
+</style>
