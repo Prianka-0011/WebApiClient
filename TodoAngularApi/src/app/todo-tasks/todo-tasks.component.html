@@ -1,17 +1,29 @@
-<nav class="navbar navbar-dark bg-dark ">
-    <a *ngIf="userDetails" class="navbar-brand text-white">{{userDetails.FullName}}</a>
-    <button (click)="EventPage()" class="btn btn-primary my-2 my-sm-0">Event</button>
-    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
-</nav>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a *ngIf="userDetails" class="navbar-brand text-white">{{userDetails.FullName}}</a>
+      <button class="navbar-toggler" type="button"data-toggle="collapse" data-target="#colapseitem">
+        <span class="navbar-toggler-icon"> </span>
+      </button>
+      <div id="colapseitem" class="collapse navbar-collapse textcenter">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="#" (click)="EventPage()" class="nav-link text-white">Event</a>
+          </li>
+        </ul>
+      </div>
+      
+      <button class="btn btn-danger ml-auto" (click)="onLogout()">Logout</button>
+    </div>
+  </nav>
 <div class="jumbtron">
         <div class="row">
-            <div class="col-md-8 offset-md-2"><app-search-task></app-search-task></div>
+            <div class="col-md-12"><app-search-task></app-search-task></div>
         </div>
         <div class="row">
-            <div class="col-md-8 offset-md-2"><app-todotask-note></app-todotask-note></div>
+            <div class="col-md-12"><app-todotask-note></app-todotask-note></div>
         </div>
         <div class="row">
-            <div class="col-md-8 offset-md-2"><app-todotask-list></app-todotask-list></div>
+            <div class="col-md-12"><app-todotask-list></app-todotask-list></div>
         </div>
 </div>
 <style>

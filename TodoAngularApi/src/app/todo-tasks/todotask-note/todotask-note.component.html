@@ -1,40 +1,41 @@
 
 <div class="midle-view">
-<form #form="ngForm"  autocomplete="off" (submit)="onSubmit(form)">
-    
+ 
+   <div class="row">
+     <div class="col-md-8 offset-md-4">
+      <form #form="ngForm"  autocomplete="off" (submit)="onSubmit(form)">
         <input type="hidden" name="Id" [value]="service.formData.Id">
             <div class="form-group">
-              <input type="text" placeholder="What do you want to do" class="form-Inline" name="Task" #Task="ngModel"[(ngModel)]="service.formData.Task" >
+              <input type="text" placeholder="What do you want to do" class="form-group" name="Task" #Task="ngModel"[(ngModel)]="service.formData.Task" >
             </div>
             <div class="form-group">
-              <input type="date"  class="form-Inline" name="Date" #Date="ngModel" [(ngModel)]="service.formData.Date">
+              <input type="date"  class="form-group" name="Date" #Date="ngModel" [(ngModel)]="service.formData.Date">
             </div>
             <div class="form-group">
-              <input type="text" placeholder="Place" class="form-Inline" name="Place" #Place="ngModel"[(ngModel)]="service.formData.Place" >
+              <input type="text" placeholder="Place" class="form-group" name="Place" #Place="ngModel"[(ngModel)]="service.formData.Place" >
             </div>
             <div class="form-group">
-              <input type="text" placeholder="Description" class="form-Inline" name="Description" #Description="ngModel"[(ngModel)]="service.formData.Description" >
+              <input type="text" placeholder="Description" class="form-group" name="Description" #Description="ngModel"[(ngModel)]="service.formData.Description" >
             </div>
             <div class="form-group">
-              <button class="add-button form-Inline" type="submit"><i class="fas fa-plus"></i></button>
+              <button class="btn btn-danger sb btn-block" type="submit"><i class="fas fa-plus"></i></button>
             </div>  
-</form>
-</div>  
+  </form>
+     </div>
+   </div>
+ </div>
+
 
 <style>
+
+.midle-view{
+    background-color: burlywood;
+  }
   .midle-view form.active {
     color: #fff;
     border-bottom: 4px solid #fff;
   }
-.midle-view{
-    
-height: 100%;
-display: flex;
-overflow: hidden;
-background-color: rgb(247, 211, 164);
-background-repeat: no-repeat;
-background-size: cover;
-}
+
 .midle-view input{
   /* padding: .5rem 1rem;
   height: 30px;
@@ -47,6 +48,10 @@ background-size: cover;
   margin: 0.25rem;
   border-radius: 25px;
   text-align: center;
+  width: 320px;
+ 
+}
+.midle-view .sb{
   width: 320px;
 }
 .midle-view .add-button{

@@ -12,12 +12,12 @@
                 <span>{{item.Task}}</span> <br>
                 <span>{{item.Place}}</span>
                 <p>{{item.Description}}</p>
-                <button *ngIf="gflag" (click)="onGoing(item.Id)" class="btn btn-primary">g<i class="fas fa-weight-hanging"></i></button>
-                <button *ngIf="!gflag"  [disabled]="!gflag" class="btn btn-dark">g<i class="fas fa-weight-hanging"></i></button>
-                <button *ngIf="mflag" (click)="myBe(item.Id)" class="btn btn-primary">m<i class="fas fa-map-marker-alt"></i></button>
-                <button *ngIf="!mflag" [disabled]="!mflag" class="btn btn-dark">m<i class="fas fa-map-marker-alt"></i></button>
-                <button *ngIf="nflag" (click)="notInterest(item.Id)" class="btn btn-primary">n<i class="fas fa-adjust"></i></button>
-                <button *ngIf="!nflag"[disabled]="!nflag"  class="btn btn-dark">n<i class="fas fa-adjust"></i></button>
+                <button *ngIf="item.go" (click)="onGoing(item.Id,item.go)" class="btn btn-primary">g<i class="fas fa-weight-hanging"></i></button>
+                <button *ngIf="!item.go"  [disabled]="!item.go" class="btn btn-dark">g<i class="fas fa-weight-hanging"></i></button>
+                <button *ngIf="item.may" (click)="myBe(item.Id,item.may)" class="btn btn-primary">m<i class="fas fa-map-marker-alt"></i></button>
+                <button *ngIf="!item.may" [disabled]="!item.may" class="btn btn-dark">m<i class="fas fa-map-marker-alt"></i></button>
+                <button *ngIf="item.not" (click)="notInterest(item.Id,item.not)" class="btn btn-primary">n<i class="fas fa-adjust"></i></button>
+                <button *ngIf="!item.not"[disabled]="!item.not"  class="btn btn-dark">n<i class="fas fa-adjust"></i></button>
            
             </div>
         </div>

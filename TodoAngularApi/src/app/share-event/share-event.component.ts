@@ -42,11 +42,9 @@ export class ShareEventComponent implements OnInit {
     }
   )
  }
- onGoing(Id)
+ onGoing(Id,go)
  {
-   this.gflag=false;
-   this.mflag=true;
-   this.nflag=true;
+   this.gflag=go;
    this.service.gomaynot.TaskId=Id;
    this.service.gomaynot.Type=1;
    this.service.postGomaynotDetail().subscribe(
@@ -58,11 +56,9 @@ export class ShareEventComponent implements OnInit {
      }
    );
  }
- myBe(Id)
+ myBe(Id,may)
  {
-   this.mflag=false;
-   this.nflag=true;
-   this.gflag=true;
+   this.mflag=may;
    this.service.gomaynot.TaskId=Id;
    this.service.gomaynot.Type=2;
    this.service.postGomaynotDetail().subscribe(
@@ -74,11 +70,9 @@ export class ShareEventComponent implements OnInit {
      }
    );
  }
- notInterest(Id)
+ notInterest(Id,not)
  {
-  this.mflag=true;
-  this.nflag=false;
-  this.gflag=true;
+  this.nflag=not;
   this.service.gomaynot.TaskId=Id;
    this.service.gomaynot.Type=3;
    this.service.postGomaynotDetail().subscribe(

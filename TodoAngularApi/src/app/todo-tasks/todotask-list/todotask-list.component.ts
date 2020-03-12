@@ -108,8 +108,19 @@ export class TodotaskListComponent implements OnInit {
   onCancle(){
     this.service.save=false;
   }
-
-   ondeleteTask(Id)
+  ondeleteTask1(Id)
+  {
+    this.service.deleteTaskDetail(Id).subscribe(
+      res=>{
+        this.service.refreshtaskList();
+        this.toastr.warning('Success fully delete','Task Detail');
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
+  ondeleteTask(Id)
    {
      this.service.deleteTaskDetail(Id).subscribe(
        res=>{
@@ -125,17 +136,7 @@ export class TodotaskListComponent implements OnInit {
      this.service.userIdList=[];
     this.service.shareData=Object.assign({},shareItem);
     this.service.taskId=this.service.shareData.Id;
-    // this.service.shareItemDetail().subscribe(
-    //   res=>{
-    //     this.service.refreshtaskList();
-    //     this.toastr.success('Successfully Share','Task details');
-    //   },
-    //   err=>{
-    //     console.log(err);
-    //   }
-    // );
-    //this.router.navigate(['/shareevent']);
-    //this.service.popup=true;
+    
     this.service.getUserDetail().subscribe(
       res=>{
        this.userDetails=res;
@@ -155,28 +156,7 @@ export class TodotaskListComponent implements OnInit {
       this.service.userIdList.push(id);
      }
 
-    // this.service.userIdList.forEach(function(item,index,object) {
-    //    if(item==id)
-    //    {
-    //      object.slice(index,1);
-    //    }
-    //    else{
-    //      object.push(id);
-    //    }
-    //  });
-    // this.service.shareEvent.Date=this.service.shareData.Date;
-    // this.service.shareEvent.Task=this.service.shareData.Task;
-    // this.service.shareEvent.UserId=id;
-    //this.service.listOfEvent.push(this.service.shareEvent);
-    // this.service.shareItemDetail().subscribe(
-    //   res=>{
-    //     this.service.refreshtaskList();
-    //     this.toastr.success('Successfully Share','Task details');
-    //   },
-    //   err=>{
-    //     console.log(err);
-    //   }
-    // )
+   
    }
    OnSubmitShare()
    {
