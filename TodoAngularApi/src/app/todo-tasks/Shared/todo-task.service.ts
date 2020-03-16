@@ -14,6 +14,7 @@ export class TodoTaskService {
   constructor(private http:HttpClient) { 
    
   }
+  Event:EventList[]=[];
   gomaynot:Gmn;
   eventId:any;
   taskId:any;
@@ -21,7 +22,7 @@ export class TodoTaskService {
   listOfEvent:EventList[]=[];
   userIdList:Array<string>;
   formData:TodoTask;
-  populateData:TodoTask;
+  populateData:TodoListFinal;
   shareData:TodoTask;
   save:boolean=false;
   popup:boolean=false;
@@ -59,20 +60,14 @@ export class TodoTaskService {
   getAllEvent()
   {
     var tokenHader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')});
-    return this.http.get(this.returnUrl+'/ShareEvents/GetSharedEvents',{headers:tokenHader});
+    this.http.get(this.returnUrl+'/ShareEvents/GetSharedEvents',{headers:tokenHader}).toPromise()
+    .then(res=>this.Event=res as EventList[]);
   }
   postGomaynotDetail()
   {
    return this.http.post(this.returnUrl+'/PeopleGoing/PostMaybe',this.gomaynot);
   }
-  // postMayDetail()
-  // {
-  //  return this.http.post(this.returnUrl+'/PeopleGoing/PostMaybe',this.goingTaskId);
-  // }
-  // postNotInterestedDetail()
-  // {
-  //   return this.http.post(this.returnUrl+'/PeopleGoing/PostNotInterest',this.goingTaskId);
-  // }
+ 
   getGoingEventCount()
   {
     return this.http.get(this.returnUrl+'/ShareEvents/going/'+this.eventId)
@@ -92,6 +87,7 @@ export class TodoTaskService {
     this.http.get(this.returnUrl+'/TodoTasks',{headers:tokenHader})
       .toPromise()
       .then(res=>this.allTaskList=res as TodoListFinal[]);
+      
   }
   
 }

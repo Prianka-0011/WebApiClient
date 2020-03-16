@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EventList } from '../Shared/event-list.model';
+import { TodoListFinal } from '../Shared/todo-list-final.model';
 
 @Component({
   selector: 'app-todotask-list',
@@ -38,6 +39,10 @@ export class TodotaskListComponent implements OnInit {
           Date: '',
           Description:'',
           Place:'',
+          UserId:"",
+          Typemay:0,
+          Typego:0,
+          TypeNinterest:0
 
         }
     
@@ -80,8 +85,8 @@ export class TodotaskListComponent implements OnInit {
     );
   }
 
-  task: TodoTask[];
-  populateDetail(item:TodoTask)
+  
+  populateDetail(item:TodoListFinal)
    {
      this.service.save=true;
      this.service.populateData=Object.assign({},item);
@@ -104,7 +109,7 @@ export class TodotaskListComponent implements OnInit {
       }
     )
   }
-
+  
   onCancle(){
     this.service.save=false;
   }
@@ -112,6 +117,7 @@ export class TodotaskListComponent implements OnInit {
   {
     this.service.deleteTaskDetail(Id).subscribe(
       res=>{
+        
         this.service.refreshtaskList();
         this.toastr.warning('Success fully delete','Task Detail');
       },
@@ -126,6 +132,7 @@ export class TodotaskListComponent implements OnInit {
        res=>{
          this.service.refreshtaskList();
          this.toastr.warning('Success fully delete','Task Detail');
+         //this.service.save=false;
        },
        err=>{
          console.log(err);
@@ -171,12 +178,15 @@ export class TodotaskListComponent implements OnInit {
     )
 
    }
+  
    onCancleUserList()
    {
      this.service.popup=false;
    }
+
+   ///here is sort data
    get sortData() {
-    return  this.service.allTaskList.sort((a, b) => {
+    return  this.service.allTaskList.sort((a, b) =>{
       return <any>new Date(a.Date) - <any>new Date(b.Date);
     });
   

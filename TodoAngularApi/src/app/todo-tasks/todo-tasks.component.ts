@@ -16,7 +16,7 @@ userDetails:any;
     this.service.getUserProfile().subscribe(
       res=>{
        this.userDetails=res;
-       this.service.userDetail1=res;
+       //this.service.userDetail1=res;
       },
       err=>{
         console.log(err);

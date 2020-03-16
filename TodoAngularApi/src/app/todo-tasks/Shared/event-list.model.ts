@@ -1,7 +1,11 @@
 export class EventList{
-    UserId:string;
+    Id:any;
+    UserName:string;
     Task:string;
     Date:string;
     Description:string;
-    Place:string
+    Place:string;
+    go:any;
+    may:any;
+    not:any;
 }

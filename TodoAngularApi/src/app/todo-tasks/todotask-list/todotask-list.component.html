@@ -4,32 +4,30 @@
       <div *ngFor="let item of sortData | taskPipe : service.query ; let i=index">
         <div *ngIf="(i>0 && item.Date!=sortData[i-1].Date) || i==0">
           <button  *ngIf="!service.save" class="item-date  btn btn-primary">{{item.Date}}</button>
-            <div *ngFor="let item1 of sortData" >
-              <div class="boderbox">
+            <div *ngFor="let item1 of sortData">
+              <div class="row">
+              <div class="col-md-12">
+              <div *ngIf="!service.save && item.Date==item1.Date" class="boderbox">
                <h1 *ngIf="!service.save && item.Date==item1.Date">{{item1.Task}}</h1>
                <h4 *ngIf="!service.save && item.Date==item1.Date">{{item1.Place}}</h4>
                <p *ngIf="!service.save && item.Date==item1.Date">{{item1.Description}}</p>
-                  <button *ngIf="!service.save && item.Date==item1.Date" class="editbutton form-Inline" (click)="populateDetail(item1)" type="submit"><i class="fas fa-pen"></i></button>
-                  <button *ngIf="!service.save && item.Date==item1.Date && item1.Typego==0 && item.Typemay==0"  class="editbutton1 form-Inline" type="submit"(click)="ondeleteTask(item1.Id)"><i class="far fa-trash-alt"></i></button>
+                <button *ngIf="!service.save && item.Date==item1.Date" class="editbutton form-Inline" (click)="populateDetail(item1)" data-toggle="modal" data-target="#exampleModal2" type="submit"><i class="fas fa-pen"></i></button>
+                <button *ngIf="!service.save && item.Date==item1.Date && item1.Typego==0 && item1.Typemay==0"  class="editbutton1 form-Inline" type="submit"(click)="ondeleteTask(item1.Id)"><i class="far fa-trash-alt"></i></button>
                   <!--delete button-->
-                  <button *ngIf="!service.save && item.Date==item1.Date && item1.Typego>0||item.Typemay>0"  class="editbutton1 form-Inline" data-toggle="modal" data-target="#exampleModal1" type="submit"><i class="far fa-trash-alt"></i></button>
+                <button *ngIf="!service.save && item.Date==item1.Date && item1.Typego>0||item1.Typemay>0"  class="editbutton1 form-Inline" data-toggle="modal" data-target="#exampleModal1" type="submit"><i class="far fa-trash-alt"></i></button>
                   <!--share button-->
-                  <button *ngIf="!service.save && item.Date==item1.Date"  class="editbutton1 form-Inline" data-toggle="modal" data-target="#exampleModal" type="submit"(click)="onshareTask(item1)"><i class="fas fa-share-alt"></i></button>
+                <button *ngIf="!service.save && item.Date==item1.Date"  class="editbutton1 form-Inline" data-toggle="modal" data-target="#exampleModal" type="submit"(click)="onshareTask(item1)"><i class="fas fa-share-alt"></i></button>
                 </div>
-                  <button class="btn btn-success" *ngIf="!service.save && item.Date==item1.Date">go{{item1.Typego}}</button>
-                  <button class="btn btn-primary" *ngIf="!service.save && item.Date==item1.Date">may{{item1.Typemay}}</button>
-                  <button class="btn btn-warning" *ngIf="!service.save && item.Date==item1.Date">not{{item1.TypeNinterest}}</button>
-                  
-                  <!--modal1-->
-                  
-               
-                  
-                  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <button class="btn item-date btn-success" *ngIf="!service.save && item.Date==item1.Date">go{{item1.Typego}}</button>
+                  <button class="btn item-date btn-primary" *ngIf="!service.save && item.Date==item1.Date">may{{item1.Typemay}}</button>
+                  <button class="btn item-date btn-warning"  *ngIf="!service.save && item.Date==item1.Date">not{{item1.TypeNinterest}}</button>
+                  <!--modal1 delete-->
+                  <div *ngIf="!service.save && item.Date==item1.Date"  class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="exampleModalLabel"> Count</h5>
-                          <button type="button" class="close" data-dismiss="modal1" aria-label="Close">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
@@ -46,17 +44,39 @@
                   </div>
                 </div>
                 <!--End Modal-->
-              </div>     
+              </div> 
+            </div> 
+            </div>    
             </div>
         </div>
-        <form #form="ngForm"  autocomplete="off" (submit)="onSubmit1(form)" >
-          <input *ngIf="service.save" type="text" placeholder="Enter your Event"  class="form-Inline item-input" name="Task" #Task="ngModel" [(ngModel)]="service.populateData.Task">
-          <input *ngIf="service.save" type="date"  class="form-Inline item-input" name="Date" #Date="ngModel" [(ngModel)]="service.populateData.Date">
-          <input *ngIf="service.save" type="text" placeholder="Enter your Place" class="form-Inline item-input" name="Place" #Place="ngModel" [(ngModel)]="service.populateData.Place">
-          <input *ngIf="service.save" type="text"placeholder="Enter your Description"  class="form-Inline item-input" name="Description" #Description="ngModel" [(ngModel)]="service.populateData.Description">
-          <button class="btn btn-primary" *ngIf="service.save">save</button>
-          <button class="btn btn-danger" *ngIf="service.save" (click)="onCancle()">cancle</button>
-         </form >
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form #form="ngForm"  autocomplete="off" (submit)="onSubmit1(form)" >
+                  <input *ngIf="service.save" type="text" placeholder="Enter your Event"  class="form-control" name="Task" #Task="ngModel" [(ngModel)]="service.populateData.Task">
+                  <input *ngIf="service.save" type="date"  class="form-control" name="Date" #Date="ngModel" [(ngModel)]="service.populateData.Date">
+                  <input *ngIf="service.save" type="text" placeholder="Enter your Place" class="form-control " name="Place" #Place="ngModel" [(ngModel)]="service.populateData.Place">
+                  <input *ngIf="service.save" type="text"placeholder="Enter your Description"  class="form-control" name="Description" #Description="ngModel" [(ngModel)]="service.populateData.Description">
+                  <button *ngIf="service.save" class="btn btn-primary">save</button> 
+                  
+                </form >
+              </div>
+              
+              <div class="modal-footer">
+                <button *ngIf="service.save" class="btn btn-danger" (click)="onCancle()">cancle</button>
+                
+              </div>
+            </div>
+        </div>
+      </div>
+        
     </div>
   </div>
   
@@ -105,6 +125,10 @@ background-size: cover; */
   padding: 50px;
   border: 1px solid rgb(77, 44, 44);
   box-sizing: border-box;
+  margin-left: 3rem;
+}
+.bottom-view .item-date{
+  margin-left: 3rem;
 }
 .bottom-view .item-input{
   padding: .5rem 1rem;

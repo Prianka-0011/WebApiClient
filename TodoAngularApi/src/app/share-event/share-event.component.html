@@ -6,17 +6,17 @@
     <div class="row">
         <div class="col-md-10 offset-md-1">
         <div class="event-box">
-            <div style="list-style:none;" *ngFor="let item of allEventDetailList">
+            <div style="list-style:none;" *ngFor="let item of EventListAll">
                 <h2>{{item.Date}}</h2>
                 <span>{{item.UserName}}</span><br>
                 <span>{{item.Task}}</span> <br>
                 <span>{{item.Place}}</span>
                 <p>{{item.Description}}</p>
-                <button *ngIf="item.go" (click)="onGoing(item.Id,item.go)" class="btn btn-primary">g<i class="fas fa-weight-hanging"></i></button>
+                <button *ngIf="item.go" (click)="onGoing(item)" class="btn btn-primary">g<i class="fas fa-weight-hanging"></i></button>
                 <button *ngIf="!item.go"  [disabled]="!item.go" class="btn btn-dark">g<i class="fas fa-weight-hanging"></i></button>
-                <button *ngIf="item.may" (click)="myBe(item.Id,item.may)" class="btn btn-primary">m<i class="fas fa-map-marker-alt"></i></button>
+                <button *ngIf="item.may" (click)="myBe(item)" class="btn btn-primary">m<i class="fas fa-map-marker-alt"></i></button>
                 <button *ngIf="!item.may" [disabled]="!item.may" class="btn btn-dark">m<i class="fas fa-map-marker-alt"></i></button>
-                <button *ngIf="item.not" (click)="notInterest(item.Id,item.not)" class="btn btn-primary">n<i class="fas fa-adjust"></i></button>
+                <button *ngIf="item.not" (click)="notInterest(item)" class="btn btn-primary">n<i class="fas fa-adjust"></i></button>
                 <button *ngIf="!item.not"[disabled]="!item.not"  class="btn btn-dark">n<i class="fas fa-adjust"></i></button>
            
             </div>
