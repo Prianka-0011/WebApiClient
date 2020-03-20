@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
    this.service.login(form.value).subscribe(
      (res:any)=>{
       localStorage.setItem('token',res.token);
-      this.router.navigateByUrl('/todotasks')
+      this.router.navigateByUrl('/todotasks');
      },
      err=>{
        if(err.status==400)

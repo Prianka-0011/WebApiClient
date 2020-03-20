@@ -41,6 +41,10 @@ export class ShareEventComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
   }
+  TaskPage()
+  {
+    this.router.navigateByUrl('/todotasks');
+  }
  get EventListAll()
  {
    

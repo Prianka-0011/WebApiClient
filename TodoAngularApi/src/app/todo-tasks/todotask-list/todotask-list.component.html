@@ -54,25 +54,24 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"> Edit</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" *ngIf="service.save" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+              <form #form="ngForm"  autocomplete="off" (submit)="onSubmit1(form)" >
               <div class="modal-body">
-                <form #form="ngForm"  autocomplete="off" (submit)="onSubmit1(form)" >
+               
                   <input *ngIf="service.save" type="text" placeholder="Enter your Event"  class="form-control" name="Task" #Task="ngModel" [(ngModel)]="service.populateData.Task">
                   <input *ngIf="service.save" type="date"  class="form-control" name="Date" #Date="ngModel" [(ngModel)]="service.populateData.Date">
                   <input *ngIf="service.save" type="text" placeholder="Enter your Place" class="form-control " name="Place" #Place="ngModel" [(ngModel)]="service.populateData.Place">
                   <input *ngIf="service.save" type="text"placeholder="Enter your Description"  class="form-control" name="Description" #Description="ngModel" [(ngModel)]="service.populateData.Description">
-                  <button *ngIf="service.save" class="btn btn-primary">save</button> 
-                  
-                </form >
+               
               </div>
-              
               <div class="modal-footer">
-                <button *ngIf="service.save" class="btn btn-danger" (click)="onCancle()">cancle</button>
-                
+                <button *ngIf="service.save" data-dismiss="modal" class="btn btn-danger" (click)="onCancle()">cancle</button>
+                <button *ngIf="service.save" type="submit"class="btn btn-primary">save</button> 
               </div>
+            </form>
             </div>
         </div>
       </div>
