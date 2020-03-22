@@ -3,7 +3,7 @@
     <div class="col-md-8 offset-md-4">
       <div *ngFor="let item of sortData | taskPipe : service.query ; let i=index">
         <div *ngIf="(i>0 && item.Date!=sortData[i-1].Date) || i==0">
-          <button  *ngIf="!service.save" class="item-date  btn btn-primary">{{item.Date}}</button>
+          <button  *ngIf="!service.save" class="item-date  btn btn-danger mt-5">{{item.Date}}</button>
             <div *ngFor="let item1 of sortData">
               <div class="row">
               <div class="col-md-12">
@@ -18,11 +18,16 @@
                   <!--share button-->
                 <button *ngIf="!service.save && item.Date==item1.Date"  class="editbutton1 form-Inline" data-toggle="modal" data-target="#exampleModal" type="submit"(click)="onshareTask(item1)"><i class="fas fa-share-alt"></i></button>
                 </div>
-                  <button class="btn item-date btn-success" *ngIf="!service.save && item.Date==item1.Date">go{{item1.Typego}}</button>
-                  <button class="btn item-date btn-primary" *ngIf="!service.save && item.Date==item1.Date">may{{item1.Typemay}}</button>
-                  <button class="btn item-date btn-warning"  *ngIf="!service.save && item.Date==item1.Date">not{{item1.TypeNinterest}}</button>
-                  <!--modal1 delete-->
-                  <div *ngIf="!service.save && item.Date==item1.Date"  class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="row">
+                  <div class="col-md-8">
+                    <button class="btn item-date btn-success" *ngIf="!service.save && item.Date==item1.Date">go{{item1.Typego}}</button>
+                    <button class="btn item-date btn-primary" *ngIf="!service.save && item.Date==item1.Date">may{{item1.Typemay}}</button>
+                    <button class="btn item-date btn-warning"  *ngIf="!service.save && item.Date==item1.Date">not{{item1.TypeNinterest}}</button>
+                    
+                  </div>
+                </div>
+                 <!--modal1 delete-->
+                  <div  class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -32,13 +37,13 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <label for="item1.Typego.">Going {{item1.Typego}}</label><br>
-                          <label for="item1.Typemay">Maybe {{item1.Typemay}}</label>
+                          <label for="item1.Typego.">Going: {{item1.Typego}}</label><br>
+                          <label for="item1.Typemay">Maybe: {{item1.Typemay}}</label>
                         </div>
                         
                         <div class="modal-footer">
+                          <button  type="submit"(click)="ondeleteTask1(item1.Id)"data-dismiss="modal"><i class="far fa-trash-alt"></i></button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button  type="submit"(click)="ondeleteTask1(item1.Id)"><i class="far fa-trash-alt"></i></button>
                         </div>
                       </div>
                   </div>
@@ -49,27 +54,28 @@
             </div>    
             </div>
         </div>
+        <!--edit-->
         <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"> Edit</h5>
-                <button type="button" *ngIf="service.save" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <form #form="ngForm"  autocomplete="off" (submit)="onSubmit1(form)" >
               <div class="modal-body">
                
-                  <input *ngIf="service.save" type="text" placeholder="Enter your Event"  class="form-control" name="Task" #Task="ngModel" [(ngModel)]="service.populateData.Task">
-                  <input *ngIf="service.save" type="date"  class="form-control" name="Date" #Date="ngModel" [(ngModel)]="service.populateData.Date">
-                  <input *ngIf="service.save" type="text" placeholder="Enter your Place" class="form-control " name="Place" #Place="ngModel" [(ngModel)]="service.populateData.Place">
-                  <input *ngIf="service.save" type="text"placeholder="Enter your Description"  class="form-control" name="Description" #Description="ngModel" [(ngModel)]="service.populateData.Description">
+                  <input  type="text" placeholder="Enter your Event"  class="form-control" name="Task" #Task="ngModel" [(ngModel)]="service.populateData.Task">
+                  <input type="date"  class="form-control" name="Date" #Date="ngModel" [(ngModel)]="service.populateData.Date">
+                  <input type="text" placeholder="Enter your Place" class="form-control " name="Place" #Place="ngModel" [(ngModel)]="service.populateData.Place">
+                  <input type="text"placeholder="Enter your Description"  class="form-control" name="Description" #Description="ngModel" [(ngModel)]="service.populateData.Description">
                
               </div>
               <div class="modal-footer">
-                <button *ngIf="service.save" data-dismiss="modal" class="btn btn-danger" (click)="onCancle()">cancle</button>
-                <button *ngIf="service.save" type="submit"class="btn btn-primary">save</button> 
+                <button  data-dismiss="modal" class="btn btn-danger" >cancle</button>
+                <button  type="submit"class="btn btn-primary" >save</button> 
               </div>
             </form>
             </div>
@@ -101,8 +107,8 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="submit" (click)="OnSubmitShare()" data-dismiss="modal" class="btn btn-secondary">Share</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" (click)="OnSubmitShare()" class="btn btn-secondary">Share</button>
       </div>
     </div>
   </div>

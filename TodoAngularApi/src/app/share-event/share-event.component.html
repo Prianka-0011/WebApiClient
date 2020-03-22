@@ -5,7 +5,7 @@
 </nav> -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-        <a *ngIf="userDetails" class="navbar-brand text-white">{{userName.FullName}}</a>
+        <a *ngIf="userName" class="navbar-brand text-white">{{userName.FullName}}</a>
       <button class="navbar-toggler" type="button"data-toggle="collapse" data-target="#colapseitem">
         <span class="navbar-toggler-icon"> </span>
       </button>
@@ -20,36 +20,101 @@
       <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
     </div>
   </nav>
+  <div class="jumbtron">
     <div class="row">
-        <div class="col-md-10 offset-md-1">
-        <div class="event-box">
-            <div style="list-style:none;" *ngFor="let item of EventListAll">
-                <h2>{{item.Date}}</h2>
-                <span>{{item.UserName}}</span><br>
-                <span>{{item.Task}}</span> <br>
-                <span>{{item.Place}}</span>
-                <p>{{item.Description}}</p>
-                <button *ngIf="item.go" (click)="onGoing(item)" class="btn btn-primary">g<i class="fas fa-weight-hanging"></i></button>
-                <button *ngIf="!item.go"  [disabled]="!item.go" class="btn btn-dark">g<i class="fas fa-weight-hanging"></i></button>
-                <button *ngIf="item.may" (click)="myBe(item)" class="btn btn-primary">m<i class="fas fa-map-marker-alt"></i></button>
-                <button *ngIf="!item.may" [disabled]="!item.may" class="btn btn-dark">m<i class="fas fa-map-marker-alt"></i></button>
-                <button *ngIf="item.not" (click)="notInterest(item)" class="btn btn-primary">n<i class="fas fa-adjust"></i></button>
-                <button *ngIf="!item.not"[disabled]="!item.not"  class="btn btn-dark">n<i class="fas fa-adjust"></i></button>
-           
+      <div class="col-md-12">
+        <div class="top-view">
+          <div class="row">
+            <div class="col-md-8">
+              <h1><span>Todo</span>List</h1>
+              
             </div>
+          </div>
         </div>
-        </div>
+       <div class="row">
+         <div class="col-md-8 offset-md-4">
+          <h2>Share Events</h2>
+          <div class="empty"></div>
+         </div>
+       </div>
+        <div class="row">
+          <div *ngFor="let item of EventListAll" class="col-md-4">
+          <div class="event-box">
+              <div style="list-style:none;" >
+                  <h3>{{item.UserName}}</h3>
+                  <h4>{{item.Date}}</h4>
+                  <h5>{{item.Task}}</h5> 
+                  <h6>{{item.Place}}</h6>
+                  <p>{{item.Description}}</p>
+                  <button *ngIf="item.go" (click)="onGoing(item)" class="btn btn-primary"><i class="fas fa-weight-hanging"></i></button>
+                  <button *ngIf="!item.go"  [disabled]="!item.go" class="btn btn-dark"><i class="fas fa-weight-hanging"></i></button>
+                  <button *ngIf="item.may" (click)="myBe(item)" class="btn btn-danger"><i class="fas fa-map-marker-alt"></i></button>
+                  <button *ngIf="!item.may" [disabled]="!item.may" class="btn btn-dark"><i class="fas fa-map-marker-alt"></i></button>
+                  <button *ngIf="item.not" (click)="notInterest(item)" class="btn btn-success"><i class="fas fa-adjust"></i></button>
+                  <button *ngIf="!item.not"[disabled]="!item.not"  class="btn btn-dark"><i class="fas fa-adjust"></i></button>
+             
+              </div>
+          </div>
+          </div>
+      </div>
+      
+      
+      </div>
     </div>
-    
-    
+    </div>
+  
+
+   
 <style>
+  .empty{
+    height: 0.4rem;
+    width: 11rem;
+    background-color: rgb(120, 207, 203);
+    margin-left: 6rem;
+    box-shadow: white;
+    border-radius: .5rem;
+  }
+   .top-view{
+height: 400px;
+width: 100%;
+background: url(assets/image/pop3.jpg);
+background-repeat: no-repeat;
+background-size: cover;
+} 
+h1{
+  margin-top: 20rem;
+  color: #044980;
+}
+span{
+  color: #B01B06;
+}
     h2{
         color: crimson;
+        margin-left: 6rem;
+    }
+    h3{
+      color: crimson;
+    }
+    h4{
+      color:black;
+    }
+    h5{
+      color: black;
+    }
+    h6{
+      color: black;
+    }
+    p{
+      color: black;
     }
     .event-box{
+      margin-left: 1rem;
+      margin-top: 4rem;
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
-    background: #2e3137;
+    background-color: rgba(192,192,192,0.6);
+    border:solid goldenrod;
+    box-sizing: border-box;
     color: antiquewhite;
     text-align: center;
     padding: 30px;
@@ -60,5 +125,8 @@
    
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+.event-box button{
+  margin-left: 1rem;
 }
 </style>
