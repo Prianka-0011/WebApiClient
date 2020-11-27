@@ -3,7 +3,7 @@
             <div class="form-group required">
                 <label>UserName</label>
                 <input type="text" class="form-control"formControlName="UserName">
-                <label *ngIf="service.formModel.get('UserName').touched && service.formModel.get('UserName').error?.required" class="text-denger">This feild is mandetory</label>
+                <label *ngIf="service.formModel.get('UserName').touched && service.formModel.get('UserName').errors?.required" class="text-denger">This feild is mandetory</label>
             </div>
             <div class="form-group">
                 <label>Email</label>
